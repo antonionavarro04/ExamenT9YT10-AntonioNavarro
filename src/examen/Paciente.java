@@ -170,7 +170,7 @@ public class Paciente implements Comparable<Paciente> {
      */
     public boolean equals(Paciente p) {
         boolean state = false;
-        if (this.nombre == p.nombre) {
+        if (this.nombre.equals(p.nombre)) {
             state = true;
 
             if (this.telefono == p.telefono) {

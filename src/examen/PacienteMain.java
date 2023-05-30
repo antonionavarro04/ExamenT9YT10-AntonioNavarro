@@ -36,6 +36,15 @@ public class PacienteMain {
     protected static Scanner read = new Scanner(System.in).useLocale(Locale.US);
 
     public static void main(String[] args) {
+        // ^ Definimos variables copia para los atributos y una variable opcion
+        String nombre, direccion, baja;
+        int telefono;
+        boolean bajaBool;
+
+        Paciente p = null;
+
+        char opcion = '9';
+
         // ^ Definimos un Scanner de Ficheros, así como un BufferedWriter
         Scanner sc = null;
 
@@ -88,17 +97,7 @@ public class PacienteMain {
                 sc.close();
             }
 
-            // ! Comenzamos con el CRUD, este CRUD se ejecutará hasta que el usuario introduzca la opción 0
-            // ^ Definimos variables copia para los atributos y una variable opcion
-            String nombre, direccion, baja;
-            int telefono;
-            boolean bajaBool;
-
-            Paciente p = null;
-
-            char opcion = '9';
-
-            do {
+            do { // ! Comenzamos con el CRUD, este CRUD se ejecutará hasta que el usuario introduzca la opción 0
                 System.out.println(MENU);
                 System.out.print(">>> ");
                 try { // ? Intentamos leer el caracter
@@ -178,18 +177,10 @@ public class PacienteMain {
                             System.err.printf("No se ha encontrado ningún paciente de nombre \"%s\" y telefono %d\n", nombre, telefono);
                         } break;
 
-                    case '5':
+                    case '5': // * Guardar en el Fichero
                         try {
-                            // ^ Cargamos el archivo en el FileWriter sin append
-                            bw = new BufferedWriter(new FileWriter(file, false));
-
-                            // ! Vaciamos el archivo
-                            bw.write("");
-                            bw.flush();
-                            bw.close();
-
                             // ^ Volvemos a cargar el archivo, esta vez con append
-                            bw = new BufferedWriter(new FileWriter(file, true));
+                            bw = new BufferedWriter(new FileWriter(file, false));
 
                             // ! Cargamos todos los datos en el archivo con el formato especificado
                             for (Paciente dato : listaPacientes) {
@@ -216,11 +207,11 @@ public class PacienteMain {
                             }
                         } break;
 
-                    case '0':
+                    case SALIR: // * Salir
                         System.out.println("Saliendo...");
                         break;
                 
-                    default:
+                    default: // * Cualquier Otro
                         System.err.printf("Opción '%s' no válida\n", opcion);
                         continue;
                 } if (opcion != SALIR) { // ? Si la opción es diferente a SALIR esperamos a que el usuario presione enter para continuar
